@@ -54,8 +54,12 @@ class HtFileAndDokuAuthStore(HtPasswdStore):
                 'Can\'t read doku password file "%s"' % filename)
 
     def _check_dokuuserline(self, user, password, hashed):
-        self.log.info('user=%s passwd=%s, hashed=%s, rv=%s' % (user, password, hashed,crypt.crypt(password, '$1$') == hashed))
-        return crypt.crypt(password, '$1$') == hashed
+        # DEBUG self.log.debug('user=%s passwd=%s, hashed=%s, rv=%s' % (user, password, hashed,crypt.crypt(password, '$1$') == hashed))
+        # TODO check with dokuwiki config and salt
+        rv = (
+            crypt.crypt(password, '$1$') == hashed or
+            hashlib.md5(password).hexdigest() == hashed)
+        return rv
 
     def check_password(self, user, password):
         """
