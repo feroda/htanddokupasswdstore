@@ -1,11 +1,10 @@
 from trac.core import *
 from trac.config import Option
-from acct_mgr.util import EnvRelativePathOption
 
 from acct_mgr.api import IPasswordStore
 from acct_mgr.htfile import HtPasswdStore
 
-import crypt
+import crypt, hashlib
 
 
 class HtFileAndDokuAuthStore(HtPasswdStore):
@@ -58,7 +57,8 @@ class HtFileAndDokuAuthStore(HtPasswdStore):
         # TODO check with dokuwiki config and salt
         rv = (
             crypt.crypt(password, '$1$') == hashed or
-            hashlib.md5(password).hexdigest() == hashed)
+            hashlib.md5(password).hexdigest() == hashed or
+            hashlib.sha1(password).hexdigest() == hashed)
         return rv
 
     def check_password(self, user, password):

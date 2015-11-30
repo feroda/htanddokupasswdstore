@@ -6,7 +6,7 @@ PACKAGE = 'TracHtAndDokuPasswdStore'
 
 setup(
     name=PACKAGE,
-    version='0.5',
+    version='0.6',
     description='AccountManager Trac plugin module for authentication with htpasswd files and dokuwiki users. It does not allow to add/remove/change users',
     author='Luca Ferroni',
     author_email='luca@befair.it',

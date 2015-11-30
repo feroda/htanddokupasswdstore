@@ -7,6 +7,8 @@ It is implemented as an extension to the TRAC plugin [AccountManager](https://tr
 
 It does not allow to change user info in the web interface.
 
+WARNING: supports only python crypt.crypt / md5 / sha1 password hashes
+
 ## Install
 
 ```
